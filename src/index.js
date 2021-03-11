@@ -4,10 +4,39 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux'
+import { store } from './store'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import Form from './components/form.js';
+import Errors from './components/error.js';
+import Congratulations from './components/congratulations.js';
+
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={ store }>
+      <Router>
+        <Switch>
+          <Route path="/congratulations" component={Congratulations} />
+            {/* <Congratulations />
+          </Route> */}
+          <Route exact path="/">
+            <Form />
+          </Route>
+          <Route path="/blog">
+            <App />
+          </Route>
+          <Route path="/errors">
+            <Errors />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>,
   document.getElementById('root')
 );
 
